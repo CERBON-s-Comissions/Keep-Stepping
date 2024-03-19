@@ -39,6 +39,8 @@ public final class StepModeHandler {
         if (KeepStepping.TOGGLE_KEY.get().consumeClick()) {
             stepMode = (stepMode + 1) % 3;
             sendMessage();
+
+            KSConfigs.INITIAL_MODE.set(stepMode);
         }
     }
 
