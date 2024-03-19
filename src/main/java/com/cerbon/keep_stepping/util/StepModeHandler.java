@@ -38,7 +38,7 @@ public final class StepModeHandler {
     private static void handleKeyPressed() {
         if (KeepStepping.TOGGLE_KEY.get().consumeClick()) {
             stepMode = (stepMode + 1) % 3;
-            sendMessage();
+            sendModeMessage();
 
             KSConfigs.INITIAL_MODE.set(stepMode);
         }
@@ -66,7 +66,7 @@ public final class StepModeHandler {
             autoJumpOption.set(true);
     }
 
-    public static void sendMessage() {
+    public static void sendModeMessage() {
         Player player = client.player;
         if (player == null) return;
 
@@ -82,5 +82,12 @@ public final class StepModeHandler {
             stepModeS = stepModeS + ChatFormatting.GREEN + I18n.get("keep_stepping.mode.auto_jump");
 
         player.displayClientMessage(Component.literal(stepModeS), false);
+    }
+
+    public static void sendToggleKeyMessage() {
+        Player player = client.player;
+        if (player == null) return;
+
+        player.displayClientMessage(Component.translatable("keep_stepping.mode.toggle_key", KeepStepping.TOGGLE_KEY.get().getKey().getDisplayName()).withStyle(ChatFormatting.DARK_AQUA), false);
     }
 }

@@ -14,8 +14,10 @@ public class ForgeClientEvents {
 
     @SubscribeEvent
     public static void onClientLogging(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (KSConfigs.SHOW_MESSAGE_ON_JOIN.get())
-            StepModeHandler.sendMessage();
+        if (KSConfigs.SHOW_MESSAGE_ON_JOIN.get()) {
+            StepModeHandler.sendModeMessage();
+            StepModeHandler.sendToggleKeyMessage();
+        }
     }
 
     @SubscribeEvent
