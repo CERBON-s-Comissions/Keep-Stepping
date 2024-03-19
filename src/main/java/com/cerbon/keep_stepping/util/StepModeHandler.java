@@ -1,10 +1,10 @@
 package com.cerbon.keep_stepping.util;
 
+import com.cerbon.keep_stepping.KeepStepping;
+import com.cerbon.keep_stepping.config.KSConfigs;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.resources.language.I18n;
@@ -12,22 +12,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.util.Lazy;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.UUID;
 
 public final class StepModeHandler {
-
-    public static final Lazy<KeyMapping> TOGGLE_KEY = Lazy.of(() -> new KeyMapping(
-            "key.keep_stepping.mode_toggle",
-            KeyConflictContext.IN_GAME,
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_G,
-            "key.categories.keep_stepping.keep_stepping"
-    ));
 
     private static final AttributeModifier STEPPING_MODIFIER = new AttributeModifier(
             UUID.fromString("51969533-e61b-4262-b0c8-5bfdebd150bc"),
@@ -38,7 +27,7 @@ public final class StepModeHandler {
 
     private static final Minecraft client = Minecraft.getInstance();
 
-    private static int stepMode = 0; // 0: Disabled, 1: StepUp, 2: AutoJump
+    private static int stepMode = KSConfigs.INITIAL_MODE.get(); // 0: Disabled, 1: StepUp, 2: AutoJump
 
     public static void onEndTick() {
         handleKeyPressed();
@@ -47,7 +36,7 @@ public final class StepModeHandler {
     }
 
     private static void handleKeyPressed() {
-        if (TOGGLE_KEY.get().consumeClick()) {
+        if (KeepStepping.TOGGLE_KEY.get().consumeClick()) {
             stepMode = (stepMode + 1) % 3;
             sendMessage();
         }
