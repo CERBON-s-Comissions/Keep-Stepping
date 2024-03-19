@@ -8,5 +8,4 @@ public class KeepStepping {
     public static final String MOD_ID = "keep_stepping";
 
     public KeepStepping() {}
-
 }
