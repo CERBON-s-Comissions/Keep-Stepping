@@ -66,7 +66,7 @@ public final class StepModeHandler {
             autoJumpOption.set(true);
     }
 
-    private static void sendMessage() {
+    public static void sendMessage() {
         Player player = client.player;
         if (player == null) return;
 
