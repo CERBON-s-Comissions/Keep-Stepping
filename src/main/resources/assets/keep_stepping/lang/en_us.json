@@ -1,4 +1,9 @@
 {
+  "key.categories.keep_stepping.keep_stepping": "Keep Stepping",
   "key.keep_stepping.mode_toggle": "Mode Toggle",
-  "key.categories.keep_stepping.keep_stepping": "Keep Stepping"
+
+  "keep_stepping.mode": "Step Mode",
+  "keep_stepping.mode.disabled": "Disabled",
+  "keep_stepping.mode.stepup": "Step Up",
+  "keep_stepping.mode.auto_jump": "Auto Jump"
 }
