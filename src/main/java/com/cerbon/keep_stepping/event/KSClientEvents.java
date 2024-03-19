@@ -1,6 +1,7 @@
 package com.cerbon.keep_stepping.event;
 
 import com.cerbon.keep_stepping.KeepStepping;
+import com.cerbon.keep_stepping.util.KSKeys;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,6 +12,6 @@ public class KSClientEvents {
 
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
-        event.register(KeepStepping.TOGGLE_KEY.get());
+        event.register(KSKeys.TOGGLE_KEY.get());
     }
 }

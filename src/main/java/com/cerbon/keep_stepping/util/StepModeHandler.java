@@ -1,6 +1,5 @@
 package com.cerbon.keep_stepping.util;
 
-import com.cerbon.keep_stepping.KeepStepping;
 import com.cerbon.keep_stepping.config.KSConfigs;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -36,7 +35,7 @@ public final class StepModeHandler {
     }
 
     private static void handleKeyPressed() {
-        if (KeepStepping.TOGGLE_KEY.get().consumeClick()) {
+        if (KSKeys.TOGGLE_KEY.get().consumeClick()) {
             stepMode = (stepMode + 1) % 3;
             sendModeMessage();
 
@@ -88,6 +87,6 @@ public final class StepModeHandler {
         Player player = client.player;
         if (player == null) return;
 
-        player.displayClientMessage(Component.translatable("keep_stepping.mode.toggle_key", KeepStepping.TOGGLE_KEY.get().getKey().getDisplayName()).withStyle(ChatFormatting.DARK_AQUA), false);
+        player.displayClientMessage(Component.translatable("keep_stepping.mode.toggle_key", KSKeys.TOGGLE_KEY.get().getKey().getDisplayName()).withStyle(ChatFormatting.DARK_AQUA), false);
     }
 }
