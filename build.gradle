@@ -1,3 +1,5 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 buildscript {
     repositories {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
@@ -12,6 +14,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.darkhax.curseforgegradle' version '1.1.18'
 }
 
 apply plugin: 'org.spongepowered.mixin'
@@ -88,6 +91,20 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+tasks.register("publishCurseForge", TaskPublishCurseForge) {
+    apiToken = System.getenv("CURSEFORGE_TOKEN")
+
+    def mainFile = upload(curseforge_project_id, jar)
+    mainFile.addModLoader("Forge")
+    mainFile.addGameVersion(game_versions.replaceAll(" ", "").split(","))
+
+    mainFile.releaseType = release_type
+    mainFile.changelogType = changelog_type
+    mainFile.changelog = rootProject.file(changelog).getText("UTF-8")
+
+    mainFile.addRequirement(required_dependencies_forge.replaceAll(" ", "").split(","))
 }
 
 tasks.named('processResources', ProcessResources).configure {
