@@ -103,8 +103,6 @@ tasks.register("publishCurseForge", TaskPublishCurseForge) {
     mainFile.releaseType = release_type
     mainFile.changelogType = changelog_type
     mainFile.changelog = rootProject.file(changelog).getText("UTF-8")
-
-    mainFile.addRequirement(required_dependencies_forge.replaceAll(" ", "").split(","))
 }
 
 tasks.named('processResources', ProcessResources).configure {
